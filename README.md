@@ -11,16 +11,7 @@ separados, um por sistema.
 
 ## O projeto em uma frase
 
-Bolsistas recebem processos de CAR em PDF (quase sempre escaneados), e o
-IntegraCAR tira desses PDFs os dados que antes eram digitados à mão: um
-sistema web recebe o arquivo, uma máquina com GPU lê o documento com um modelo
-de visão, e o bolsista revisa na tela o que a máquina leu, lado a lado com o
-PDF original.
-
-Tecnicamente: um sistema de gestão (web, em VPS) delega extração de campos e
-geração de camada de texto a serviços assíncronos que rodam em uma workstation
-local, e consolida o resultado em uma tela de revisão campo a campo com
-rastreabilidade de origem (página do PDF de onde cada valor foi lido).
+===
 
 ---
 
@@ -60,21 +51,6 @@ dentro dos respectivos repositórios.
 | [gestao/desenvolvimento.md](gestao/desenvolvimento.md) | Como subir o ambiente local e trabalhar no código |
 | [gestao/deploy.md](gestao/deploy.md) | Deploy em produção: Docker, nginx, HTTPS, backup, rollback |
 | [gestao/testes.md](gestao/testes.md) | Suíte de 485 testes: estrutura, como rodar, cobertura real |
-
----
-
-## Convenções da documentação
-
-- **Português do Brasil em tudo**: texto, exemplos, comentários e mensagens de
-  commit. A equipe age sobre a documentação; documentação em inglês obriga a
-  traduzir antes de agir.
-- **Sem emojis.**
-- **Referências a código no formato `arquivo:linha`** (por exemplo
-  `main.py:142`), nunca URL completa do GitHub no meio do texto — em
-  notificação por e-mail a URL vira uma tira de link que quebra a leitura.
-- **Nada de número inventado.** Contagens de teste, de endpoint e de cobertura
-  neste repositório foram medidas na data indicada em cada documento, e cada
-  uma traz o comando que a reproduz.
 
 ---
 
