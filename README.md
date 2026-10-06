@@ -9,24 +9,13 @@ separados, um por sistema.
 
 ---
 
-## O projeto em uma frase
-
-===
-
----
-
 ## Mapa dos repositórios
 
-Cada nome abaixo aponta para a **documentação do sistema neste repositório**,
-não para o código.
+Cada nome abaixo aponta para a **documentação do sistema neste repositório**.
 
 | Repositório | Papel | Onde roda | Documentação |
 | --- | --- | --- | --- |
 | `integracar-gestao` | Sistema de gestão de processos CAR/Simlam: API, frontend, perfis de usuário, revisão de campos | VPS | [`gestao/`](gestao/README.md) |
-
-As duas metades do sistema de extração (`integracar-backend` e
-`integracar-ocr`) são mantidas por outra equipe e têm documentação própria
-dentro dos respectivos repositórios.
 
 ---
 
