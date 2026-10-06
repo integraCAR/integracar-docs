@@ -61,6 +61,15 @@ Eles formam cinco sistemas, mais dois repositórios de apoio.
 
 ## Conteúdo desta documentação
 
+### Processo de trabalho (não são repositórios)
+
+| Documento | Para que serve |
+| --- | --- |
+| [processos/README.md](processos/README.md) | O caminho de um processo, do papel ao sistema, e os números de cada etapa |
+| [processos/digitalizacao.md](processos/digitalizacao.md) | Digitalização dos processos CAR físicos |
+| [processos/autuacao.md](processos/autuacao.md) | Autuação dos processos no E-Docs e despacho para o grupo IntegraCAR |
+| [processos/comunicacao.md](processos/comunicacao.md) | Ações de comunicação do projeto |
+
 ### Sistema de Gestão (`integracar-gestao`)
 
 | Documento | Para que serve |
@@ -154,5 +163,6 @@ referência.
 ## Projeto
 
 Parceria: Idaf, Ifes e Fapes
+Demais parceiros: Seger, Inova Ifes, SERD, CREA e CRTES
 Vigência: 2024-2027
 Site: [integracar.agr.br](https://integracar.agr.br)
