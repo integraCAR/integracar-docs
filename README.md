@@ -153,6 +153,6 @@ referência.
 
 ## Projeto
 
-Parceria: Idaf, Ifes e Seger
+Parceria: Idaf, Ifes e Fapes
 Vigência: 2024-2027
 Site: [integracar.agr.br](https://integracar.agr.br)
