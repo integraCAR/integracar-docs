@@ -1,4 +1,4 @@
-# Web — sites do IntegraCAR
+# Web - sites do IntegraCAR
 
 Dois repositórios de páginas web: o site institucional do projeto, ainda
 planejado, e uma versão anterior da página do dataset de uso do solo.

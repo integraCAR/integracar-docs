@@ -1,4 +1,4 @@
-# IntegraCAR LULC — Land Use and Land Cover
+# IntegraCAR LULC - Land Use and Land Cover
 
 Research line of the IntegraCAR project that builds open datasets and baseline
 models for **land use and land cover (LULC) semantic segmentation** of rural
@@ -40,12 +40,12 @@ paired GeoTIFF files with identical extent, CRS, pixel grid and GSD.
 
 | Epoch | SATELLITE | SEGMENTED |
 | --- | --- | --- |
-| 2019–2020 | KOMPSAT-3/3A orthophotomosaic, WMS layer `geonode:ijsn-ortofotomosaico-es-kompsat-3-3a-2019-2020` | IJSN LULC map (2019), WMS layer `geonode:ijsn_map_uso_solo_es_2019_20200` |
-| 2012–2015 | IEMA aerial orthophotomosaic (0.25 m GSD), WMS layer `geonode:iema_ortofotomosaico_es_025m_2012-2015` | GeoBases vector shapefile `Mapeamento_Uso_Cobertura_Vegetal_2012`, rasterized locally with the 2019–2020 RGB palette |
+| 2019-2020 | KOMPSAT-3/3A orthophotomosaic, WMS layer `geonode:ijsn-ortofotomosaico-es-kompsat-3-3a-2019-2020` | IJSN LULC map (2019), WMS layer `geonode:ijsn_map_uso_solo_es_2019_20200` |
+| 2012-2015 | IEMA aerial orthophotomosaic (0.25 m GSD), WMS layer `geonode:iema_ortofotomosaico_es_025m_2012-2015` | GeoBases vector shapefile `Mapeamento_Uso_Cobertura_Vegetal_2012`, rasterized locally with the 2019-2020 RGB palette |
 | `both` | All four products per coordinate, with 100% spatial parity | |
 
 WMS endpoint: `https://ide.geobases.es.gov.br/geoserver/ows` (version 1.3.0).
-The 2012–2015 shapefile is downloaded from the public GeoBases S3 bucket when
+The 2012-2015 shapefile is downloaded from the public GeoBases S3 bucket when
 not cached locally.
 
 ### How it works
@@ -101,7 +101,7 @@ python extractor.py --csv sample_train_coordinates.csv --output ./output --limit
 | `--csv` | required | Input CSV, `;` delimiter, columns `property_id` (or `cod_imovel`), `x`, `y` in EPSG:31984 |
 | `--output` (`-o`, `--path`, `--caminho`) | required | Output directory |
 | `--period` (`--year`, `--ano`, `--periodo`) | `2019-2020` | `2019-2020`, `2012-2015` or `both` |
-| `--shapefile` (`--shp`) | auto | Local 2012–2015 shapefile or folder; otherwise cache or S3 download |
+| `--shapefile` (`--shp`) | auto | Local 2012-2015 shapefile or folder; otherwise cache or S3 download |
 | `--flat` | off | Single period: write directly into `SATELLITE/` and `SEGMENTED/` |
 | `--buffer` | `1024` | Half side, in meters, of the square window around the centroid |
 | `--width` (`--largura`), `--height` (`--altura`) | `2048` | Output size in pixels |
@@ -133,19 +133,19 @@ Manifest columns: `sample_id`, `property_id`, `period`, `x`, `y`,
 
 High-resolution optical satellite dataset for LULC semantic segmentation in the
 context of the CAR in Espírito Santo, built with `integracar-lulc-builder` from
-KOMPSAT-3/3A imagery and GeoBases thematic annotations (2019–2020).
+KOMPSAT-3/3A imagery and GeoBases thematic annotations (2019-2020).
 
 | Property | Value |
 | --- | --- |
 | Hugging Face | `laicsiifes/IntegraCAR-LULC-10K`, DOI `10.57967/hf/10542` |
-| Creator | LAICSI — Laboratório de Inteligência Computacional e Sistemas de Informação (IFES) |
+| Creator | LAICSI - Laboratório de Inteligência Computacional e Sistemas de Informação (IFES) |
 | License | MIT |
 | Size | 10,000 image/mask pairs (20,000 rows), Parquet |
 | Image size | 2,048 × 2,048 px, RGB |
 | Splits | `satellite_train` / `mask_train` 6,000 · `satellite_val` / `mask_val` 2,000 · `satellite_test` / `mask_test` 2,000 |
 | Fields | `image`, `filename`, `latitude`, `longitude`, `municipio`, `microestad` |
 | Sampling | Geographic stratification: 1,000 coordinates in each of the 10 official microregions of Espírito Santo |
-| Annotations | IJSN experts, visual photointerpretation of 2019–2020 imagery |
+| Annotations | IJSN experts, visual photointerpretation of 2019-2020 imagery |
 
 ```python
 from datasets import load_dataset
@@ -189,7 +189,7 @@ challenges, due to spectral similarity in single-date RGB imagery.
 
 The labels come from photointerpretation and may be uncertain at class
 boundaries and in shadowed areas. The benchmark reflects land cover in
-2019–2020, not the current state on the ground.
+2019-2020, not the current state on the ground.
 
 ---
 

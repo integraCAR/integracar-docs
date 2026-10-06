@@ -1,4 +1,4 @@
-# Worker de OCR — `integracar-ocr-extrator`
+# Worker de OCR - `integracar-ocr-extrator`
 
 Serviço que consome a fila de jobs no Postgres, lê cada PDF escaneado com um
 modelo de visão e grava os campos estruturados de volta no banco. É o único
@@ -178,10 +178,10 @@ Quando há mais de um requerimento no processo, vale o mais recente.
 
 | Campo | Descrição |
 | --- | --- |
-| `area_total_propriedade` | ATP — área total da propriedade |
-| `area_vegetacao_nativa` | AVN — área de vegetação nativa |
-| `area_preservacao_permanente` | APP — total |
-| `area_reserva_legal` | ARL — total |
+| `area_total_propriedade` | ATP - área total da propriedade |
+| `area_vegetacao_nativa` | AVN - área de vegetação nativa |
+| `area_preservacao_permanente` | APP - total |
+| `area_reserva_legal` | ARL - total |
 
 A fonte principal é a seção "3. QUADRO DE ÁREAS" (singular) do recibo de
 solicitação de inscrição no CAR. O OCR embaralha rótulo e valor de jeitos

@@ -1,6 +1,6 @@
 # integracar-docs
 
-Documentação técnica do projeto **IntegraCAR** — apoio à análise e à gestão dos
+Documentação técnica do projeto **IntegraCAR**, de apoio à análise e à gestão dos
 processos do Cadastro Ambiental Rural (CAR) e do Simlam no Estado do Espírito
 Santo.
 
@@ -28,8 +28,8 @@ Eles formam cinco sistemas, mais dois repositórios de apoio.
 | LULC | `IntegraCAR-LULC-10K` | Público | Página do dataset IntegraCAR-LULC-10K (EN/PT) | Site estático | [`lulc/`](lulc/README.md#integracar-lulc-10k-landing-page) |
 | Web | `integracar-web` | Público | Site institucional do projeto (planejado) | VPS | [`web/`](web/README.md) |
 | Web | `LANDING-PAGE-INTEGRACAR-ES` | Privado | Versão anterior da página do dataset | Site estático | [`web/`](web/README.md#landing-page-integracar-es) |
-| Apoio | `integracar-docs` | Público | Esta documentação | — | este arquivo |
-| Apoio | `.github` | Público | Página de apresentação da organização no GitHub (`profile/README.md`) | — | [`.github`](https://github.com/integraCAR/.github) |
+| Apoio | `integracar-docs` | Público | Esta documentação | - | este arquivo |
+| Apoio | `.github` | Público | Página de apresentação da organização no GitHub (`profile/README.md`) | - | [`.github`](https://github.com/integraCAR/.github) |
 
 ### Como os sistemas se conectam
 
@@ -92,7 +92,7 @@ Eles formam cinco sistemas, mais dois repositórios de apoio.
 | --- | --- |
 | [dashboard/README.md](dashboard/README.md) | Coleta no E-Docs, regra de classificação IntegraCAR, banco SQLite, telas, operação no servidor |
 
-### LULC — uso e cobertura do solo (em inglês)
+### LULC - uso e cobertura do solo (em inglês)
 
 | Documento | Para que serve |
 | --- | --- |
@@ -117,7 +117,7 @@ referência.
 | `integracar-backend-extrator` | `integracar-backend`, `integracar-backend-ocr` |
 | `integracar-ocr-extrator` | `integracar-ocr`, `integracar-solucao-ocr` |
 | `integracar-infra-extrator` | `integracar-infra`, `integracar-infra-ocr` |
-| — (fora de uso, não está na organização) | `integracar-frontend`, `integracar-frontend-ocr` |
+| - (fora de uso, não está na organização) | `integracar-frontend`, `integracar-frontend-ocr` |
 | `integracar-dashboard` | `Dashboard-IntegraCAR` (nome da pasta no servidor: `/opt/Dashboard-IntegraCAR`) |
 | organização `integraCAR` | `integracar-cachoeiro` |
 
@@ -137,9 +137,22 @@ referência.
 
 ---
 
+## Equipe Desenvolvedora
+
+- Arthur Gonçalves
+- Beatriz Ruela
+- Cauã Marvila
+- Eduardo Esquincalha
+- Gabriela Marques
+- Lucas Altoé
+- Mikaela Cantalejo
+- Murilo Cruz
+- Pedro Almeida
+
+---
+
 ## Projeto
 
-Coordenação: IFES Campus Cachoeiro de Itapemirim
-Parceiros: IDAF, FAPES, SEGER, Inova IFES
-Vigência: 2024 – 2027
+Parceria: Idaf, Ifes e Seger
+Vigência: 2024-2027
 Site: [integracar.agr.br](https://integracar.agr.br)

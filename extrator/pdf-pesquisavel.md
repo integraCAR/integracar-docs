@@ -1,4 +1,4 @@
-# PDF Pesquisável — `PDF-Pesquisavel`
+# PDF Pesquisável - `PDF-Pesquisavel`
 
 Serviço assíncrono que transforma PDFs escaneados em PDFs pesquisáveis, com
 camada de texto. A API recebe os arquivos e guarda os metadados no Redis; um
@@ -148,8 +148,8 @@ A cópia intermediária é apagada no fim.
 
 | Variável | Obrigatória | Padrão | Descrição |
 | --- | --- | --- | --- |
-| `SEARCHABLE_SERVICE_TOKEN` | Sim | — | Autentica as chamadas recebidas |
-| `SEARCHABLE_CALLBACK_TOKEN` | Sim | — | Autentica os callbacks enviados |
+| `SEARCHABLE_SERVICE_TOKEN` | Sim | - | Autentica as chamadas recebidas |
+| `SEARCHABLE_CALLBACK_TOKEN` | Sim | - | Autentica os callbacks enviados |
 | `REDIS_URL` | Não | `redis://redis:6379/0` | Conexão Redis |
 | `SEARCHABLE_STORAGE_ROOT` | Não | `/data/documents` | Diretório dos documentos no container |
 | `MAX_UPLOAD_MB` | Não | `0` | Limite por arquivo; `0` desativa o limite da aplicação |

@@ -1,4 +1,4 @@
-# Infraestrutura da Extração — `integracar-infra-extrator`
+# Infraestrutura da Extração - `integracar-infra-extrator`
 
 Orquestração da stack de extração num único `docker compose`: API, worker de
 OCR, Postgres, serviço de PDF pesquisável, gateway nginx, observabilidade

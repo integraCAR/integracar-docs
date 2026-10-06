@@ -1,4 +1,4 @@
-# API de Extração — `integracar-backend-extrator`
+# API de Extração - `integracar-backend-extrator`
 
 API FastAPI + Postgres do sistema de extração. É dona de quatro coisas:
 
@@ -77,7 +77,7 @@ Diretórios de runtime, compartilhados com o worker por bind mount:
 | Área | Header | Conferido contra | Observação |
 | --- | --- | --- | --- |
 | Rotas internas (`documentos`, `jobs`, `worker`) | `X-Service-Token` | `SERVICE_TOKEN` (env) | Um consumidor só: o sistema de gestão. Comparação em tempo constante (`hmac.compare_digest`). A API **não sobe** sem `SERVICE_TOKEN` |
-| `/health` | nenhum | — | Público, usado pelo blackbox_exporter |
+| `/health` | nenhum | - | Público, usado pelo blackbox_exporter |
 | API pública `/v1` | `X-Api-Key` | hash em `clientes_api.chave_hash` | Uma chave por cliente; cada cliente só vê os próprios documentos |
 | Callback (saída) | `X-Service-Token` | `CALLBACK_TOKEN` | Enviado pelo worker ao gestão |
 
