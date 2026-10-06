@@ -9,10 +9,6 @@ registram atividades.
 resto (leitura dos PDFs por modelo de visão, geração de camada de texto) roda
 em serviços de retaguarda que este sistema aciona e aguarda.
 
-> **Leitura em dois níveis.** Cada seção começa com a explicação em linguagem
-> comum e termina com o detalhe técnico. Quem quer entender o sistema pode
-> parar no primeiro parágrafo; quem vai mexer no código precisa do segundo.
-
 ---
 
 ## Sumário
@@ -23,11 +19,8 @@ em serviços de retaguarda que este sistema aciona e aguarda.
 4. [Funcionalidades](#4-funcionalidades)
 5. [Stack e versões](#5-stack-e-versões)
 6. [Mapa do repositório](#6-mapa-do-repositório)
-7. [Começando](#7-começando)
-8. [Variáveis de ambiente](#8-variáveis-de-ambiente)
-9. [Comandos do dia a dia](#9-comandos-do-dia-a-dia)
-10. [Estado atual e limitações conhecidas](#10-estado-atual-e-limitações-conhecidas)
-11. [Documentação detalhada](#11-documentação-detalhada)
+7. [Estado atual](#7-estado-atual)
+8. [Documentação detalhada](#8-documentação-detalhada)
 
 ---
 
@@ -346,132 +339,7 @@ A arquitetura em camadas e o porquê de cada uma estão em
 
 ---
 
-## 7. Começando
-
-Pré-requisitos: Python 3.12+, Node 20+, Docker (para o MySQL) e Git.
-
-```bash
-git clone https://github.com/integraCAR/integracar-gestao.git
-cd integracar-gestao
-
-# 1. Backend: ambiente e dependências
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-
-# 2. Configuração
-cp .env.example .env
-python3 -c "import secrets; print(secrets.token_urlsafe(32))"   # cole em SECRET_KEY
-# edite o .env: banco, e-mail e as quatro variáveis OCR_* (obrigatórias)
-
-# 3. MySQL local
-docker compose up -d mysql
-
-# 4. Schema e dados iniciais  (ATENCAO: apaga tudo que existir)
-python initialize_database.py
-
-# 5. Backend em modo dev, porta 8000
-uvicorn main:app --reload
-```
-
-Em outro terminal:
-
-```bash
-cd frontend
-npm install
-npm run dev        # http://localhost:5173
-```
-
-- Interface: <http://localhost:5173>
-- API, documentação interativa: <http://localhost:8000/docs> e `/redoc`
-
-O passo a passo completo, incluindo o que fazer quando algo não sobe, está em
-[desenvolvimento.md](desenvolvimento.md).
-
----
-
-## 8. Variáveis de ambiente
-
-### Backend (`.env` na raiz)
-
-**Obrigatórias — o processo não sobe sem elas.** `conexao_db.py` valida as de
-banco, `main.py:205` a `SECRET_KEY` e `util/ocr_config.py` as de OCR; todas
-falham alto e claro no boot.
-
-| Variável | Para que serve |
-| --- | --- |
-| `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`, `DB_NAME` | Conexão MySQL |
-| `SECRET_KEY` | Assina o cookie de sessão. Nunca reaproveitar entre ambientes |
-| `ENVIRONMENT` | `development` ou `production`. Governa `root_path`, CSP, HSTS, cookie `secure` e CORS |
-| `FRONTEND_URL` | Origem liberada no CORS e base dos redirecionamentos de login |
-| `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_FROM`, `MAIL_SERVER`, `MAIL_PORT` | SMTP da recuperação de senha |
-| `OCR_API_BASE` | URL da API de extração |
-| `OCR_SERVICE_TOKEN` | Token que **este** sistema envia em `X-Service-Token` |
-| `OCR_CALLBACK_TOKEN` | Token que este sistema **exige** no callback recebido |
-| `OCR_PUBLIC_BASE` | Base pública própria, usada para montar a `callback_url`. Precisa ser alcançável pela internet |
-
-**Opcionais.**
-
-| Variável | Padrão | Para que serve |
-| --- | --- | --- |
-| `MAIL_FROM_NAME` | — | Nome do remetente |
-| `OCR_RECONCILIACAO_INTERVALO_S` | `300` | Intervalo da reconciliação de jobs pendentes. `0` desliga |
-| `SEARCHABLE_API_BASE` | — | URL do serviço de PDF pesquisável |
-| `SEARCHABLE_SERVICE_TOKEN` | — | Token enviado ao serviço |
-| `SEARCHABLE_CALLBACK_TOKEN` | — | Token exigido no callback do serviço |
-
-As três `SEARCHABLE_*` funcionam **em conjunto**: faltando qualquer uma,
-`SEARCHABLE_ATIVO` é falso e o recurso fica desligado, servindo o PDF original.
-Isso é deliberado — tornar obrigatório derrubaria no boot toda instalação que
-ainda não subiu o serviço.
-
-`OCR_SERVICE_TOKEN` e `OCR_CALLBACK_TOKEN` são **tokens diferentes**, cada um
-com uma direção. Trocá-los um pelo outro produz `401` silencioso em um dos dois
-sentidos.
-
-### Frontend (`frontend/.env`)
-
-| Variável | Padrão | Para que serve |
-| --- | --- | --- |
-| `API_URL` | `http://backend:8000` | Endereço da API visto **pelo servidor Node**. Em Docker, nome do serviço; nunca a URL pública, que faria o SSR sair para a internet e perder o cookie de sessão |
-| `ENVIRONMENT` | — | `production` liga o prefixo `/gestao/api` nas chamadas e o `basename` `/gestao/` |
-
-`NEXT_PUBLIC_API_URL`, presente em `frontend/.env` e no `docker-compose.yml`,
-é resquício do frontend Next.js antigo e **não é lida por nenhum código atual**.
-Ver [limitações conhecidas](#10-estado-atual-e-limitações-conhecidas).
-
----
-
-## 9. Comandos do dia a dia
-
-```bash
-# ---------- Backend ----------
-uvicorn main:app --reload               # dev, porta 8000
-pytest                                  # suíte inteira, com cobertura (pytest.ini)
-pytest tests/test_routes -v             # só as rotas
-pytest -k nome_do_teste                 # por palavra-chave
-python3 check-deploy.py                 # 9 verificações pré-deploy
-
-# ---------- Frontend ----------
-cd frontend
-npm run dev                             # dev com HMR, porta 5173
-npm run typecheck                       # react-router typegen && tsc
-npm run build                           # build de produção
-npm run start                           # serve o build (react-router-serve)
-
-# ---------- Docker ----------
-docker compose up -d mysql              # só o banco, para dev local
-docker compose up -d --build            # stack inteira
-docker compose logs -f backend
-```
-
-`pytest` sozinho já roda com cobertura: as flags estão em `pytest.ini`
-(`--cov`, `--cov-branch`, relatórios em terminal, `htmlcov/` e
-`coverage.xml`). Para rodar sem cobertura, use `pytest --no-cov`.
-
----
-
-## 10. Estado atual e limitações conhecidas
+## 7. Estado atual
 
 Medido em 2026-10-06, no `main`.
 
@@ -484,47 +352,9 @@ Medido em 2026-10-06, no `main`.
 | Endpoints HTTP | 83 | `grep -rh '^@router\.' routes \| wc -l` |
 | Tabelas MySQL | 9 | ver [banco-de-dados.md](banco-de-dados.md) |
 
-### Pendências e armadilhas
-
-- **`docker-compose.yml` não configura o frontend.** O serviço `frontend`
-  recebe `NEXT_PUBLIC_API_URL`, que o React Router não lê, e **não** recebe
-  `API_URL` nem `ENVIRONMENT`. Na prática o padrão `http://backend:8000`
-  acerta o endereço por acidente (é o nome do serviço no compose), mas
-  `ENVIRONMENT` ausente desliga o prefixo `/gestao/api` em tempo de execução
-  enquanto o `basename` `/gestao/` é fixado em tempo de build por `NODE_ENV`.
-  Conferir contra o nginx antes de confiar. Ver [deploy.md](deploy.md).
-- **Rate limiting em memória.** `util/rate_limit.py` usa `storage_uri="memory://"`:
-  o limite é por processo e zera a cada reinício. Com mais de um worker uvicorn,
-  o limite efetivo é multiplicado pelo número de workers. Para valer em
-  produção, precisa de Redis.
-- **Senhas de contas importadas ficam em texto puro.** Decisão de negócio
-  registrada em `docs/security/relatorio-seguranca.md`: a equipe precisa
-  consultar a senha temporária para comunicar ao usuário no lançamento. As
-  senhas definidas pelo próprio usuário usam bcrypt normalmente.
-- **Bloqueio de primeiro acesso desativado.** O trecho que forçava a troca de
-  senha no primeiro login está comentado em `util/auth_decorator.py`. A tela
-  existe (`/configurar-senha`) e o endpoint funciona, mas nada obriga a passar
-  por ela.
-- **`gestor_tecnico` e `gestor_administrativo` sem backend.** Ver
-  [perfis](#3-perfis-de-usuário).
-- **`initialize_database.py` apaga o banco.** Não há sistema de migração: o
-  schema nasce de `CREATE TABLE IF NOT EXISTS` nos repositórios e evolui por
-  scripts pontuais em `scripts/`, rodados à mão uma vez cada. Em produção,
-  rodar apenas o script da migração, nunca o `initialize_database.py`.
-- **`initialize_database.py` não derruba a tabela de atividades.** O script faz
-  `DROP TABLE IF EXISTS Atividades` (plural), mas a tabela criada e usada pelo
-  sistema é `Atividade` (singular, `data/sql/atividades_sql.py`). O `DROP` é um
-  no-op: ao reinicializar, as atividades antigas sobrevivem apontando para
-  `cod_usuario` de usuários que acabaram de ser recriados com outros ids.
-- **`frontend/app/lib/tabela_modulos.json` é cópia manual** de
-  `util/tabela_modulos.json`. Mudou lá, copie aqui.
-- **`.coveragerc` inclui `source = .`**, o que mede também arquivos de
-  script e migração raramente executados; a cobertura real das camadas de
-  rota, serviço e repositório é mais alta que os 71,52% do total.
-
 ---
 
-## 11. Documentação detalhada
+## 8. Documentação detalhada
 
 | Documento | Conteúdo |
 | --- | --- |

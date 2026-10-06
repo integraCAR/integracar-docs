@@ -23,11 +23,6 @@ não para o código.
 | Repositório | Papel | Onde roda | Documentação |
 | --- | --- | --- | --- |
 | `integracar-gestao` | Sistema de gestão de processos CAR/Simlam: API, frontend, perfis de usuário, revisão de campos | VPS | [`gestao/`](gestao/README.md) |
-| `integracar-backend` | API de extração de campos (dona do schema Postgres e da fila de jobs) | Workstation | No próprio repositório (`CLAUDE.md`) |
-| `integracar-ocr` | Worker do pipeline de OCR: PDF em imagens, modelo de visão, extração de campos | Workstation | No próprio repositório (`CLAUDE.md`) |
-| `PDF-Pesquisavel` | Serviço que adiciona camada de texto aos PDFs escaneados (OCRmyPDF) | Workstation | Resumida em [`gestao/integracoes.md`](gestao/integracoes.md) |
-| `integracar-infra` | Orquestração `docker compose` de toda a stack da workstation | Workstation | No próprio repositório (`CLAUDE.md`) |
-| `integracar-frontend` | Frontend antigo da API de extração. **Descontinuado**, não usar | — | — |
 
 As duas metades do sistema de extração (`integracar-backend` e
 `integracar-ocr`) são mantidas por outra equipe e têm documentação própria
